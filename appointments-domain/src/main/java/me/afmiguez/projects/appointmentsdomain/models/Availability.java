@@ -10,6 +10,7 @@ import java.time.LocalTime;
 
 @Builder
 @Data
+@Slf4j
 public class Availability {
     @NonNull
     private DayOfWeek dayOfWeek;
@@ -20,9 +21,11 @@ public class Availability {
 
 
     public boolean canSchedule(Appointment appointment){
+        log.debug("Check if can schedule a appointment");
         DayOfWeek appointmentDay=appointment.getStartTime().getDayOfWeek();
 
         if(appointmentDay.equals(dayOfWeek)){
+            log.debug("Availability and Appointment are in the same DayOfWeek");
             return contains(appointment);
         }
         return false;
@@ -31,6 +34,7 @@ public class Availability {
     private boolean contains(Appointment appointment){
         LocalTime appointmentStartTime=appointment.getStartTime().toLocalTime();
         LocalTime appointmentEndTime=appointment.getEndTime().toLocalTime();
+        log.debug("Availability start should be before or at same time as Appointment Start AND Availability end should be after or at same time as Appointment End");
         return (this.start.isBefore(appointmentStartTime) || this.start.equals(appointmentStartTime))
                 &&
                 (this.end.isAfter(appointmentEndTime) || this.end.equals(appointmentEndTime));
