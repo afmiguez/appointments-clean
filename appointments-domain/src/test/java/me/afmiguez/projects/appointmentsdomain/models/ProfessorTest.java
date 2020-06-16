@@ -42,6 +42,7 @@ class ProfessorTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(10,30))
+                .professor(professor)
                 .build());
 
         assertEquals(1, professor.getAvailabilities().size());
@@ -50,6 +51,7 @@ class ProfessorTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(10,30))
+                .professor(professor)
                 .build());
 
         assertEquals(1, professor.getAvailabilities().size());
@@ -65,6 +67,7 @@ class ProfessorTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(12,0))
+                .professor(professor)
                 .build());
 
         Appointment atBeginAvailability=Appointment.builder()
@@ -97,6 +100,7 @@ class ProfessorTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(12,0))
+                .professor(professor)
                 .build());
 
         Appointment beforeBeginAvailability=Appointment.builder()

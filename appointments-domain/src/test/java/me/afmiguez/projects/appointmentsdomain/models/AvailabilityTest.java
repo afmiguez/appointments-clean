@@ -32,6 +32,7 @@ class AvailabilityTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(12,0))
+                .professor(professor)
                 .build();
 
         Appointment appointmentInside= Appointment.builder()
@@ -61,6 +62,7 @@ class AvailabilityTest {
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(10,0))
                 .end(LocalTime.of(12,0))
+                .professor(professor)
                 .build();
 
         Appointment appointmentBeforeAvailability= Appointment.builder()

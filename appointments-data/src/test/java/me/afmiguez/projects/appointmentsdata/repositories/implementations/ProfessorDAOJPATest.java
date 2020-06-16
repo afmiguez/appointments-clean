@@ -1,7 +1,8 @@
 package me.afmiguez.projects.appointmentsdata.repositories.implementations;
 
-import me.afmiguez.projects.appointmentsdata.entities.ProfessorEntity;
+
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.ProfessorDAO;
+import me.afmiguez.projects.appointmentsdomain.models.Professor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,7 +21,7 @@ class ProfessorDAOJPATest {
     @Test
     void findByEmail() {
 
-        ProfessorEntity professorEntity=ProfessorEntity.builder()
+        Professor professor=Professor.builder()
                 .firstName("firstname")
                 .lastName("lastname")
                 .email("email")
@@ -30,7 +31,7 @@ class ProfessorDAOJPATest {
 
         assertFalse(professorDAO.findByEmail("email").isPresent());
 
-        professorDAO.save(professorEntity);
+        professorDAO.save(professor);
 
         assertTrue(professorDAO.findByEmail("email").isPresent());
 

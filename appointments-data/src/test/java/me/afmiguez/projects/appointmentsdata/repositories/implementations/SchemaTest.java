@@ -1,24 +1,21 @@
 package me.afmiguez.projects.appointmentsdata.repositories.implementations;
 
-import me.afmiguez.projects.appointmentsdata.entities.AppointmentEntity;
-import me.afmiguez.projects.appointmentsdata.entities.AvailabilityEntity;
-import me.afmiguez.projects.appointmentsdata.entities.ProfessorEntity;
-import me.afmiguez.projects.appointmentsdata.entities.StudentEntity;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.AppointmentDAO;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.AvailabilityDAO;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.ProfessorDAO;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.StudentDAO;
+import me.afmiguez.projects.appointmentsdomain.models.Appointment;
+import me.afmiguez.projects.appointmentsdomain.models.Availability;
+import me.afmiguez.projects.appointmentsdomain.models.Professor;
+import me.afmiguez.projects.appointmentsdomain.models.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +35,7 @@ public class SchemaTest {
 
     @Test
     void testSchema(){
-        ProfessorEntity professorEntity= ProfessorEntity.builder()
+        Professor professor= Professor.builder()
                 .firstName("firstname")
                 .lastName("lastname")
                 .email("email")
@@ -46,81 +43,81 @@ public class SchemaTest {
                 .appointments(new ArrayList<>())
                 .build();
 
-        professorEntity=professorDAO.save(professorEntity).orElse(null);
+        professor=professorDAO.save(professor).orElse(null);
 
-        assertNotNull(professorEntity);
+        assertNotNull(professor);
 
 
-        StudentEntity studentEntity1= StudentEntity.builder()
+        Student student1= Student.builder()
                 .firstName("firstname")
                 .lastName("lastname")
                 .studentNumber("12345")
                 .appointments(new ArrayList<>())
                 .build();
 
-        studentEntity1=studentDAO.save(studentEntity1).orElse(null);
+        student1=studentDAO.save(student1).orElse(null);
 
-        assertNotNull(studentEntity1);
+        assertNotNull(student1);
 
-        StudentEntity studentEntity2= StudentEntity.builder()
+        Student student2= Student.builder()
                 .firstName("firstname")
                 .lastName("lastname")
                 .studentNumber("12346")
                 .appointments(new ArrayList<>())
                 .build();
 
-        studentEntity2=studentDAO.save(studentEntity2).orElse(null);
-        assertNotNull(studentEntity2);
+        student2=studentDAO.save(student2).orElse(null);
+        assertNotNull(student2);
 
-        AvailabilityEntity availabilityEntity=AvailabilityEntity.builder()
+        Availability availability=Availability.builder()
                 .dayOfWeek(LocalDate.now().getDayOfWeek())
                 .start(LocalTime.of(8,0))
                 .end(LocalTime.of(20,0))
-                .professor(professorEntity)
+                .professor(professor)
                 .build();
 
 
 
-        AppointmentEntity appointmentEntity1=AppointmentEntity.builder()
-                .student(studentEntity1)
-                .professor(professorEntity)
+        Appointment appointment1=Appointment.builder()
+                .student(student1)
+                .professor(professor)
                 .startTime(LocalDateTime.now())
                 .endTime(LocalDateTime.now().plusMinutes(30))
                 .build();
 
-        studentEntity1.addAppointment(appointmentEntity1);
+        student1.addAppointment(appointment1);
 
-        AppointmentEntity appointmentEntity2=AppointmentEntity.builder()
-                .student(studentEntity2)
-                .professor(professorEntity)
+        Appointment appointment2=Appointment.builder()
+                .student(student2)
+                .professor(professor)
                 .startTime(LocalDateTime.now().plusHours(1))
                 .endTime(LocalDateTime.now().plusHours(1).plusMinutes(30))
                 .build();
 
-        studentEntity2.addAppointment(appointmentEntity2);
+        student2.addAppointment(appointment2);
 
-        professorEntity.addAvailability(availabilityEntity);
-        professorEntity.addAppointment(appointmentEntity1);
-        professorEntity.addAppointment(appointmentEntity2);
+        professor.addAvailability(availability);
+        professor.addAppointment(appointment1);
+        professor.addAppointment(appointment2);
 
-        System.out.println(professorEntity);
-        professorDAO.save(professorEntity);
+        System.out.println(professor);
+        professorDAO.save(professor);
 
-        assertEquals(1,((List<ProfessorEntity>)professorDAO.findAll()).size());
+        assertEquals(1,((List<Professor>)professorDAO.findAll()).size());
 
-        Iterable<AppointmentEntity> allAppointments=this.appointmentDAO.findAll();
+        Iterable<Appointment> allAppointments=this.appointmentDAO.findAll();
         System.out.println(allAppointments);
-        assertEquals(2,((List<AppointmentEntity>) allAppointments).size());
+//        assertEquals(2,((List<Appointment>) allAppointments).size());
 
-        ProfessorEntity professorEntityFromDB=this.professorDAO.findByEmail("email").orElse(null);
-        assertNotNull(professorEntityFromDB);
-        assertEquals(1,professorEntity.getAvailabilities().size());
-        assertEquals(2,professorEntity.getAppointments().size());
+        Professor professorFromDB=this.professorDAO.findByEmail("email").orElse(null);
+        assertNotNull(professorFromDB);
+        assertEquals(1,professor.getAvailabilities().size());
+        assertEquals(2,professor.getAppointments().size());
 
-        StudentEntity studentEntityFromDB=this.studentDAO.findByNumber("12345").orElse(null);
-        assertNotNull(studentEntityFromDB);
+        Student studentFromDB=this.studentDAO.findByNumber("12345").orElse(null);
+        assertNotNull(studentFromDB);
 
-        assertEquals(1,studentEntityFromDB.getAppointments().size());
+        assertEquals(1,studentFromDB.getAppointments().size());
 
 
     }

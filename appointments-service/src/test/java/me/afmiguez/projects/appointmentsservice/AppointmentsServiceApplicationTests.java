@@ -1,10 +1,10 @@
-package me.afmiguez.projects.appointmentsdata;
+package me.afmiguez.projects.appointmentsservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AppointmentsDataApplicationTests {
+class AppointmentsServiceApplicationTests {
 
     @Test
     void contextLoads() {

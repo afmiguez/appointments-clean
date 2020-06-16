@@ -1,15 +1,13 @@
-package me.afmiguez.projects.appointmentsdata.entities;
-
-import lombok.Data;
+package me.afmiguez.projects.appointmentsdomain.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+
 @MappedSuperclass
-@Data
-public class BaseEntity {
+public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

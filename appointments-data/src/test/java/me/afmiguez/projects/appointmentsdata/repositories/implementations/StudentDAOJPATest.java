@@ -1,13 +1,10 @@
 package me.afmiguez.projects.appointmentsdata.repositories.implementations;
 
-import me.afmiguez.projects.appointmentsdata.entities.StudentEntity;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.StudentDAO;
+import me.afmiguez.projects.appointmentsdomain.models.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.repository.config.BootstrapMode;
 
 import java.util.ArrayList;
 
@@ -21,14 +18,14 @@ class StudentDAOJPATest {
 
     @Test
     void findByNumber() {
-        StudentEntity studentEntity=StudentEntity.builder()
+        Student student=Student.builder()
                 .appointments(new ArrayList<>())
                 .firstName("firstname")
                 .lastName("lastname")
                 .studentNumber("12345")
                 .build();
 
-        studentDAO.save(studentEntity);
+        studentDAO.save(student);
 
         assertTrue(studentDAO.findByNumber("12345").isPresent());
         assertFalse(studentDAO.findByNumber("123456").isPresent());

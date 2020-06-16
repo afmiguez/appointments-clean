@@ -1,5 +1,6 @@
 package me.afmiguez.projects.appointmentsdata.repositories.implementations;
 
+import lombok.extern.slf4j.Slf4j;
 import me.afmiguez.projects.appointmentsdata.repositories.interfaces.BaseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+@Slf4j
 public abstract class BaseDAOJPA<T,K> implements BaseDAO<T,K> {
 
     protected CrudRepository<T,K> repository;
@@ -19,6 +21,7 @@ public abstract class BaseDAOJPA<T,K> implements BaseDAO<T,K> {
 
     @Override
     public Optional<T> save(T t) {
+        log.debug(t.toString());
         return Optional.of(repository.save(t));
     }
 

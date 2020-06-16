@@ -1,9 +1,9 @@
 package me.afmiguez.projects.appointmentsdata.repositories.interfaces;
 
-import me.afmiguez.projects.appointmentsdata.entities.ProfessorEntity;
+import me.afmiguez.projects.appointmentsdomain.models.Professor;
 
 import java.util.Optional;
 
-public interface ProfessorDAO extends BaseDAO<ProfessorEntity,Long> {
-    Optional<ProfessorEntity> findByEmail(String email);
+public interface ProfessorDAO extends BaseDAO<Professor,Long> {
+    Optional<Professor> findByEmail(String email);
 }

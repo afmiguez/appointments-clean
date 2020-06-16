@@ -1,6 +1,6 @@
 package me.afmiguez.projects.appointmentsdata.repositories.interfaces;
 
-import me.afmiguez.projects.appointmentsdata.entities.AppointmentEntity;
+import me.afmiguez.projects.appointmentsdomain.models.Appointment;
 
-public interface AppointmentDAO extends BaseDAO<AppointmentEntity,Long> {
+public interface AppointmentDAO extends BaseDAO<Appointment,Long> {
 }

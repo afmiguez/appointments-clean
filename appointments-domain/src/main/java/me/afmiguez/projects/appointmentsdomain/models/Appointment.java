@@ -1,17 +1,23 @@
 package me.afmiguez.projects.appointmentsdomain.models;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@Entity
 @Builder
 @Data
-public class Appointment {
-    @NonNull
+@NoArgsConstructor
+@AllArgsConstructor
+public class Appointment extends BaseModel {
+    @ManyToOne
+    @ToString.Exclude
     private Student student;
-    @NonNull
+    @ManyToOne
+    @ToString.Exclude
     private Professor professor;
     @NonNull
     private LocalDateTime startTime;

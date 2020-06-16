@@ -1,23 +1,30 @@
 package me.afmiguez.projects.appointmentsdomain.models;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+@Entity
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Slf4j
-public class Availability {
+public class Availability extends BaseModel {
     @NonNull
     private DayOfWeek dayOfWeek;
     @NonNull
     private LocalTime start;
     @NonNull
     private LocalTime end;
+    @NonNull
+    @ManyToOne
+    @ToString.Exclude
+    private Professor professor;
 
 
     public boolean canSchedule(Appointment appointment){

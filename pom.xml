@@ -20,6 +20,7 @@
     <modules>
         <module>appointments-domain</module>
         <module>appointments-data</module>
+        <module>appointments-web</module>
     </modules>
 
     <dependencies>

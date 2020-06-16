@@ -2,12 +2,19 @@ package me.afmiguez.projects.appointmentsdomain.models;
 
 import lombok.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Entity
 @Builder
 @Data
-public class Professor {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Professor extends BaseModel {
 
     @NonNull
     private String email;
@@ -16,9 +23,11 @@ public class Professor {
     @NonNull
     private String lastName;
     @NonNull
-    private List<Appointment> appointments;
+    @OneToMany(orphanRemoval = true,mappedBy = "professor",cascade ={CascadeType.PERSIST,CascadeType.MERGE})
+    private List<Appointment> appointments=new ArrayList<>();
     @NonNull
-    private List<Availability> availabilities;
+    @OneToMany(orphanRemoval = true,mappedBy = "professor",cascade ={CascadeType.PERSIST,CascadeType.MERGE})
+    private List<Availability> availabilities=new ArrayList<>();
 
     public List<Availability> getAvailabilities(){
         return Collections.unmodifiableList(availabilities);
@@ -31,14 +40,13 @@ public class Professor {
     public void addAvailability(Availability availability){
         if(!availabilities.contains(availability)){
             availabilities.add(availability);
+            availability.setProfessor(this);
         }
     }
 
     public void addAppointment(Appointment appointment){
-        if(canSchedule(appointment) && !alreadyHaveAppointment(appointment)){
-            appointments.add(appointment);
-            appointment.setProfessor(this);
-        }
+        appointments.add(appointment);
+        appointment.setProfessor(this);
     }
 
     private boolean alreadyHaveAppointment(Appointment newAppointment){
@@ -57,5 +65,9 @@ public class Professor {
             }
         }
         return false;
+    }
+
+    public boolean canAddAppointment(Appointment appointment) {
+        return canSchedule(appointment) && !alreadyHaveAppointment(appointment);
     }
 }
