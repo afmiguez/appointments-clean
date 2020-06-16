@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class CreateStudentUseCaseImpl implements CreateStudentUseCase {
 
-    private StudentDAO studentDAO;
+    private final StudentDAO studentDAO;
 
     @Autowired
     public CreateStudentUseCaseImpl(StudentDAO studentDAO) {

@@ -3,14 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>me.afmiguez.projects</groupId>
-        <artifactId>appointments</artifactId>
-        <version>0.0.1</version>
-        <relativePath>../</relativePath> <!-- lookup parent from repository -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>me.afmiguez.projects</groupId>
+    <groupId>me.afmiguez.projects.appointments</groupId>
     <artifactId>appointments-web</artifactId>
     <version>0.0.1</version>
+
     <name>appointments-web</name>
     <description>Demo project for Spring Boot</description>
 
@@ -18,39 +19,25 @@
         <java.version>11</java.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>jcenter-snapshots</id>
-            <name>jcenter</name>
-            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
-        </repository>
-    </repositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <!-- Import dependency management from Spring Boot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.3.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>appointments-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>appointments-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -87,24 +74,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>me.afmiguez.projects</groupId>
-            <artifactId>appointments-data</artifactId>
-            <version>0.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.afmiguez.projects</groupId>
-            <artifactId>appointments-domain</artifactId>
-            <version>0.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.afmiguez.projects</groupId>
-            <artifactId>appointments-service</artifactId>
-            <version>0.0.1</version>
-            <scope>compile</scope>
-        </dependency>
+
     </dependencies>
 
     <build>

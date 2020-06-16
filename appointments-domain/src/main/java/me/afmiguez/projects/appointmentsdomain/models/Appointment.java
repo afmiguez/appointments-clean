@@ -2,11 +2,11 @@ package me.afmiguez.projects.appointmentsdomain.models;
 
 import lombok.*;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Builder
 @Data
@@ -24,15 +24,10 @@ public class Appointment extends BaseModel {
     @NonNull
     private LocalDateTime endTime;
 
-    /**
-     * Check if appointments times overlaps. Must be commutative
-     * @param other
-     * @return
-     */
+
     public boolean overlaps(Appointment other) {
         return !(notOverlaps(other) || other.notOverlaps(other));
     }
-
 
     private boolean notOverlaps(Appointment other){
         LocalDateTime start1=this.startTime;

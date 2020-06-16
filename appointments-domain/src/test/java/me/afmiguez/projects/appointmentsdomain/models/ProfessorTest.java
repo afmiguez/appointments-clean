@@ -110,7 +110,7 @@ class ProfessorTest {
                 .professor(professor)
                 .build();
 
-        professor.addAppointment(beforeBeginAvailability);
+        assertFalse(professor.canAddAppointment(beforeBeginAvailability));
 
         assertEquals(0,professor.getAppointments().size());
 
@@ -121,9 +121,10 @@ class ProfessorTest {
                 .professor(professor)
                 .build();
 
-        professor.addAppointment(beforeBeginAvailabilityEndsInside);
+//        professor.addAppointment(beforeBeginAvailabilityEndsInside);
 
-        assertEquals(0,professor.getAppointments().size());
+        assertFalse(professor.canAddAppointment(beforeBeginAvailabilityEndsInside));
+
 
         Appointment endAfterAvailability=Appointment.builder()
                 .startTime(LocalDateTime.of(LocalDate.now(),LocalTime.of(12,0)))
@@ -132,9 +133,10 @@ class ProfessorTest {
                 .professor(professor)
                 .build();
 
-        professor.addAppointment(endAfterAvailability);
+//        professor.addAppointment(endAfterAvailability);
+        assertFalse(professor.canAddAppointment(endAfterAvailability));
 
-        assertEquals(0,professor.getAppointments().size());
+//        assertEquals(0,professor.getAppointments().size());
 
         Appointment startDuringEndAfterAvailability=Appointment.builder()
                 .startTime(LocalDateTime.of(LocalDate.now(),LocalTime.of(10,30)))
@@ -143,10 +145,11 @@ class ProfessorTest {
                 .professor(professor)
                 .build();
 
-        professor.addAppointment(startDuringEndAfterAvailability);
+//        professor.addAppointment(startDuringEndAfterAvailability);
 
-        assertEquals(0,professor.getAppointments().size());
+//        assertEquals(0,professor.getAppointments().size());
 
+        assertFalse(professor.canAddAppointment(startDuringEndAfterAvailability));
 
         Appointment validAppointment=Appointment.builder()
                 .startTime(LocalDateTime.of(LocalDate.now(),LocalTime.of(10,0)))
@@ -155,14 +158,15 @@ class ProfessorTest {
                 .professor(professor)
                 .build();
 
+        assertTrue(professor.canAddAppointment(validAppointment));
         professor.addAppointment(validAppointment);
 
         assertEquals(1,professor.getAppointments().size(),"Should add new Appointment");
 
 
-        professor.addAppointment(validAppointment);
+        assertFalse(professor.canAddAppointment(validAppointment));
 
-        assertEquals(1,professor.getAppointments().size(),"Should not add new Appointment. Same period Appointment already scheduled");
+//        assertEquals(1,professor.getAppointments().size(),"Should not add new Appointment. Same period Appointment already scheduled");
 
 
     }

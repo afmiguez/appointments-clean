@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.afmiguez.projects.appointmentsdomain.models.Availability;
 import me.afmiguez.projects.appointmentsservice.usecases.interfaces.CreateAvailabilityUseCase;
 import me.afmiguez.projects.appointmentsweb.dtos.AvailabilityCreateDTO;
-import me.afmiguez.projects.appointmentsweb.dtos.ProfessorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

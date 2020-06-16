@@ -5,7 +5,6 @@ import me.afmiguez.projects.appointmentsdata.repositories.interfaces.ProfessorDA
 import me.afmiguez.projects.appointmentsdomain.models.Availability;
 import me.afmiguez.projects.appointmentsdomain.models.Professor;
 import me.afmiguez.projects.appointmentsservice.usecases.interfaces.CreateAvailabilityUseCase;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,24 +15,21 @@ import java.util.Optional;
 public class CreateAvailabilityUseCaseImpl implements CreateAvailabilityUseCase {
 
     private final ProfessorDAO professorDAO;
-    private final ModelMapper modelMap;
 
     @Autowired
-    public CreateAvailabilityUseCaseImpl(ProfessorDAO professorDAO,ModelMapper modelMap) {
+    public CreateAvailabilityUseCaseImpl(ProfessorDAO professorDAO) {
         this.professorDAO = professorDAO;
-        this.modelMap=modelMap;
     }
 
     @Override
-    public Optional<Availability> createAvailability(Availability availabilityDTO) {
-        if(null == availabilityDTO.getProfessor() || null==availabilityDTO.getProfessor().getEmail()) {
+    public Optional<Availability> createAvailability(Availability availability) {
+        if(null == availability.getProfessor() || null==availability.getProfessor().getEmail()) {
             return Optional.empty();
         }
 
-        Optional<Professor> optionalProfessorFromDB= professorDAO.findByEmail(availabilityDTO.getProfessor().getEmail());
+        Optional<Professor> optionalProfessorFromDB= professorDAO.findByEmail(availability.getProfessor().getEmail());
         if(optionalProfessorFromDB.isPresent()){
             Professor professorFromDB=optionalProfessorFromDB.get();
-            Availability availability=convertToModel(availabilityDTO);
             professorFromDB.addAvailability(availability);
             professorDAO.save(professorFromDB);
             return Optional.of(availability);
@@ -41,7 +37,4 @@ public class CreateAvailabilityUseCaseImpl implements CreateAvailabilityUseCase 
         return Optional.empty();
     }
 
-    private Availability convertToModel(Availability availabilityCreateDTO){
-        return modelMap.map(availabilityCreateDTO,Availability.class);
-    }
 }

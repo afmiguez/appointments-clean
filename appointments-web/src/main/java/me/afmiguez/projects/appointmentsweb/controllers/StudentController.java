@@ -4,10 +4,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import me.afmiguez.projects.appointmentsdata.repositories.interfaces.StudentDAO;
 import me.afmiguez.projects.appointmentsdomain.models.Student;
 import me.afmiguez.projects.appointmentsservice.usecases.interfaces.CreateStudentUseCase;
-import me.afmiguez.projects.appointmentsweb.dtos.ProfessorDTO;
 import me.afmiguez.projects.appointmentsweb.dtos.StudentCreateDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,7 @@ public class StudentController {
     private final ModelMapper modelMapper;
     private final CreateStudentUseCase createStudentUseCase;
 
+    @Autowired
     public StudentController(ModelMapper modelMapper,CreateStudentUseCase createStudentUseCase) {
         this.modelMapper = modelMapper;
         this.createStudentUseCase=createStudentUseCase;

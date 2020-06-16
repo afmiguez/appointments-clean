@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @Slf4j
 public class ListProfessorUseCasesImpl implements ListProfessorUseCases {
 
-    private ProfessorDAO professorDAO;
+    private final ProfessorDAO professorDAO;
 
     @Autowired
     public ListProfessorUseCasesImpl(ProfessorDAO professorDAO) {

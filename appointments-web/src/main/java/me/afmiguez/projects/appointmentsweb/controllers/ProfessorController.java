@@ -1,6 +1,5 @@
 package me.afmiguez.projects.appointmentsweb.controllers;
 
-
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import me.afmiguez.projects.appointmentsdomain.models.Appointment;
@@ -46,9 +45,7 @@ public class ProfessorController{
     })
     public ResponseEntity<Iterable<ProfessorDTO>> listAllProfessors(){
         List<ProfessorDTO> professors=new ArrayList<>();
-        listProfessorUseCases.listAll().forEach(professor -> {
-            professors.add(convertToDTO(professor));
-        });
+        listProfessorUseCases.listAll().forEach(professor -> professors.add(convertToDTO(professor)));
         return ResponseEntity.ok(professors);
     }
 
@@ -79,17 +76,13 @@ public class ProfessorController{
 
     private List<AppointmentSimpleDTO> convertToListAppointmentDTO(List<Appointment> appointments){
         List<AppointmentSimpleDTO> appointmentDTOS=new ArrayList<>();
-        appointments.forEach(appointment -> {
-            appointmentDTOS.add(modelMapper.map(appointment,AppointmentSimpleDTO.class));
-        });
+        appointments.forEach(appointment -> appointmentDTOS.add(modelMapper.map(appointment,AppointmentSimpleDTO.class)));
         return appointmentDTOS;
     }
 
     private List<AvailabilitySimpleDTO> convertToListAvailabilityDTO(List<Availability> availabilities){
         List<AvailabilitySimpleDTO> availabilitiesDTO=new ArrayList<>();
-        availabilities.forEach(availability -> {
-            availabilitiesDTO.add(modelMapper.map(availability,AvailabilitySimpleDTO.class));
-        });
+        availabilities.forEach(availability -> availabilitiesDTO.add(modelMapper.map(availability,AvailabilitySimpleDTO.class)));
         return availabilitiesDTO;
     }
 

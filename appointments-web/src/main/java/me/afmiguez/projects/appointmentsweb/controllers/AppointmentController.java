@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiResponses;
 import me.afmiguez.projects.appointmentsdomain.models.Appointment;
 import me.afmiguez.projects.appointmentsservice.usecases.interfaces.CreateAppointmentUseCase;
 import me.afmiguez.projects.appointmentsweb.dtos.AppointmentCreateDTO;
-import me.afmiguez.projects.appointmentsweb.dtos.ProfessorDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/appointment")
 public class AppointmentController {
 
-    private CreateAppointmentUseCase createAppointmentUseCase;
-    private ModelMapper modelMapper;
+    private final CreateAppointmentUseCase createAppointmentUseCase;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public AppointmentController(CreateAppointmentUseCase createAppointmentUseCase, ModelMapper modelMapper) {

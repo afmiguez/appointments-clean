@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Builder
 @Data

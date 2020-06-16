@@ -6,6 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"me.afmiguez.projects.appointmentsservice"})
+@ComponentScan(basePackages = {"me.afmiguez.projects.appointmentsservice","me.afmiguez.projects.appointmentsdata"})
 public class AppointmentsServiceApplication {
 }

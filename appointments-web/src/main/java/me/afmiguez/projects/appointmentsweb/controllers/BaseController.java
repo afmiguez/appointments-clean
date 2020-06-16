@@ -20,8 +20,8 @@ import java.util.Optional;
 @Slf4j
 public abstract class BaseController<T, E> {
 
-    private BaseDAO<E,Long> dao;
-    protected ModelMapper modelMapper;
+    private final BaseDAO<E,Long> dao;
+    protected final ModelMapper modelMapper;
 
     @Autowired
     public BaseController(BaseDAO<E, Long> dao, ModelMapper modelMapper) {

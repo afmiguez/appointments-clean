@@ -7,5 +7,5 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan("me.afmiguez.projects.appointmentsdomain")
-public class ApplicationJPAContext {
+public class ApplicationDomainContext {
 }
